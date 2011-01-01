@@ -25,11 +25,6 @@ if __name__ == '__main__':
     if minibatch_count == len(start_idx):
         end_idx.append(m_vars['n_users'])
     lr = m_opts['lr_alpha']*(1.0 + np.arange(minibatch_count*m_opts['num_epochs']))**(-m_opts['lr_tau'])
-    # lr = np.clip(minibatch_count*m_opts['lr_alpha']*lr,1e-10,0.9)
-    # print "Initial gammas:",lr[:10]
-
-    # print minibatch_count
-    # print start_idx, end_idx
 
     if m_opts['save']:
         os.system('mkdir -p checkpoints/'+m_opts['name']+'/')
