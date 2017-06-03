@@ -22,7 +22,7 @@ def argparser():
     parser.add_argument('-performance_k', type=int, default=5)
     
     # Model parameters
-    parser.add_argument('-observance', type=bool, default=True)
+    parser.add_argument('-observance', action='store_true')
     parser.add_argument('-bs','--batch_size', type=int, default=256)
     # parser.add_argument('-u_bsize', type=int, default=256)
     # parser.add_argument('-l_bsize', type=int, default=256)

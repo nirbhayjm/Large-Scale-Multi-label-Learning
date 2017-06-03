@@ -15,16 +15,20 @@ def initialize(m_opts):
     data = loadmat(m_opts['dataset'])
     print "Dataset loaded: ",m_opts['dataset']
 
-    m_vars['Y_train'] = sparsify(data['X_tr'])
-    m_vars['X_train'] = sparsify(data['Y_tr'])
-    m_vars['Y_test'] = sparsify(data['X_te'])
-    m_vars['X_test'] = sparsify(data['Y_te'])
+    m_vars['Y_train'] = sparsify(data['Y_tr'])
+    m_vars['X_train'] = sparsify(data['X_tr'])
+    m_vars['Y_test'] = sparsify(data['Y_te'])
+    m_vars['X_test'] = sparsify(data['X_te'])
 
-    print "Train Dims",m_vars['Y_train'].shape, m_vars['X_train'].shape
-    print "Test Dims",m_vars['Y_test'].shape, m_vars['X_test'].shape 
+    # print "Train Dims",m_vars['Y_train'].shape, m_vars['X_train'].shape
+    # print "Test Dims",m_vars['Y_test'].shape, m_vars['X_test'].shape 
 
     m_vars['n_users'],m_vars['n_labels'] = m_vars['Y_train'].shape
     m_vars['n_features'] = m_vars['X_train'].shape[1]
+
+    print "n_users: ",m_vars['n_users']
+    print "n_features: ",m_vars['n_features']
+    print "n_labels: ",m_vars['n_labels']
 
     if m_opts['label_normalize']:
         normalize(m_vars['Y_train'],norm='l2',axis=1,copy=False)
