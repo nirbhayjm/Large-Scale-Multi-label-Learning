@@ -41,11 +41,11 @@ def initialize(m_opts):
     m_vars['a'] = 1.
     m_vars['b'] = 1.
 
-    # accumulator of sufficient statistics of label factors
+    # Accumulator of sufficient statistics of label factors V
     m_vars['sigma_v'] = np.zeros((m_vars['n_labels'], m_opts['n_components'], m_opts['n_components']))
     m_vars['x_v'] = np.zeros((m_vars['n_labels'], m_opts['n_components']))
 
-    # accumulator of sufficient statistics of W matrix
+    # Accumulator of sufficient statistics of W matrix
     m_vars['sigma_W'] = np.zeros((m_vars['n_features'], m_vars['n_features']))
     m_vars['x_W'] = np.zeros((m_vars['n_features'], m_opts['n_components']))
 
@@ -68,8 +68,8 @@ def update(m_opts, m_vars):
     return m_vars
 
 def update_U(m_opts, m_vars):
-    for i in range(m_opts['batch_size']):
-        for it in range(m_opts['PG_iters']):
+    for it in range(m_opts['PG_iters']):
+        for i in range(m_opts['batch_size']):
             P_i, N_i = E_xi_omega_row(i, m_opts, m_vars) # expectation of xi_{nl} for n = i, expecation of omega_{nl} for n = i
             K_i = PG_row(i, m_opts, m_vars) # polyagamma kappa_{nl} for n = i
             PN_i = P_i*N_i
@@ -138,8 +138,9 @@ def E_xi_omega_row(row_no, m_opts, m_vars):
     return E_xi, E_omega
 
 def PG_row(row_no, m_opts, m_vars):
-    PG = m_vars['Y_batch'][row_no].todense()-0.5
-    return np.array(PG).reshape(-1)
+    # PG = np.asarray(m_vars['Y_batch'][row_no].todense())-0.5
+    PG = np.asarray(m_vars['Y_batch'].getrow(row_no).todense())-0.5
+    return PG.reshape(-1)
 
 def E_xi_omega_col(col_no, m_opts, m_vars):
     # sigmoid = lambda x: 1/(1+np.exp(-x))
@@ -154,8 +155,8 @@ def E_xi_omega_col(col_no, m_opts, m_vars):
     return E_xi, E_omega
 
 def PG_col(col_no, m_opts, m_vars):
-    PG = m_vars['Y_batch'][:,col_no].todense()-0.5
-    return np.array(PG).reshape(-1)
+    PG = np.asarray(m_vars['Y_batch_T'].getrow(col_no).todense())-0.5
+    return PG.reshape(-1)
 
 def E_xi(m_opts, m_vars):
     # sigmoid = lambda x: 1/(1+np.exp(-x))

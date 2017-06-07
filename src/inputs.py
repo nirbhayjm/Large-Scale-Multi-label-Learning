@@ -12,7 +12,7 @@ def argparser():
     # Train time options
     parser.add_argument('-num_epochs', type=int, default=10)
     parser.add_argument('-random_state', type=int, default=0)
-    parser.add_argument('-shuffle_minibatches', type=bool, default=True)
+    parser.add_argument('-shuffle_minibatches', action='store_true')
     # parser.add_argument('-save_dir', type=str, default="./")
     # parser.add_argument('-save_interval', type=int, default=25)
     parser.add_argument('-save', type=bool, default=False)

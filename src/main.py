@@ -43,6 +43,8 @@ if __name__ == '__main__':
 
             m_vars['Y_batch'] = m_vars['Y_train'][lo:hi]
             m_vars['X_batch'] = m_vars['X_train'][lo:hi]
+            m_vars['Y_batch_T'] = m_vars['Y_batch'].T
+            m_vars['X_batch_T'] = m_vars['X_batch'].T
             m_vars['gamma'] = lr[iter_idx]
 
             # Updates go here

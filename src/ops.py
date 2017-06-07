@@ -15,13 +15,15 @@ def normalize(M):
 def sparsify(Y):
     import scipy.sparse as ssp
 
-    if not ssp.issparse(Y):
+    # if not ssp.issparse(Y):
+    if type(ssp.issparse(Y)) != ssp.csr.csr_matrix:
         Y = ssp.csr_matrix(Y)
+    print "Sparsify output:",type(Y)
     return Y
 
 def shuffle(X, Y, Z, random_state):
     sklearn.utils.shuffle(X,Y,Z,random_state=random_state)
 
 def sigmoid(x):
-    y = np.clip(x, -20, np.inf)
+    y = np.clip(x, -40, np.inf)
     return 1/(1+np.exp(-y))
