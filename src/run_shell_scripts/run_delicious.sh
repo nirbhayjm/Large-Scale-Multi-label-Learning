@@ -1,6 +1,6 @@
-python main.py --dataset="../data/delicious_1.mat" -v -o \
--bs=1292 -n_components=100 \
+python main.py --dataset="../data/delicious_new.mat" -v \
+-bs=1024 -n_components=100 \
 -lam_u=1e-2 -lam_v=1e-2 -lam_w=1e-4 \
--use_cg -cg_iters=8 -PG_iters=5 -use_grad \
--lr_alpha=0.6 -lr_tau=0.75 \
--init_mu_a=1. -init_mu_b=1.
+-use_cg -cg_iters=8 -PG_iters=5 -use_grad -grad_alpha=1e-3 \
+-lr_alpha=0.1 -lr_tau=0.75 
+# -init_mu=0.01
